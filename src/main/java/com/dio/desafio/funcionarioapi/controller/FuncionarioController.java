@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dio.desafio.funcionarioapi.dto.TreinamentoDto;
 import com.dio.desafio.funcionarioapi.entidade.Funcionario;
 import com.dio.desafio.funcionarioapi.exception.FuncionarioNotFoundException;
 import com.dio.desafio.funcionarioapi.repository.FuncionarioRepository;
@@ -72,5 +73,11 @@ public class FuncionarioController {
 		
 		funcionarioRepository.save(funcionario);
 		return "Funcionario atualizado com id " + id;
+	}
+	
+	@GetMapping("/{id}/treinamento")
+	public List<TreinamentoDto> buscaTreinamentoPorFuncionarioId(@PathVariable Long id) {
+		List<TreinamentoDto> treinamentos = funcionarioRepository.findTreinametnoByFuncionarioId_Named(id);
+		return treinamentos;
 	}
 }

@@ -1,5 +1,6 @@
 package com.dio.desafio.funcionarioapi.entidade;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -9,8 +10,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
+import javax.persistence.ConstructorResult;
+import javax.persistence.ColumnResult;
 
+import com.dio.desafio.funcionarioapi.dto.TreinamentoDto;
 import com.dio.desafio.funcionarioapi.enums.TipoGenero;
 
 import lombok.AllArgsConstructor;
@@ -19,11 +25,31 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity(name = "Funcionario")
-@Table(name = "funcionario")
+@Table (name = "funcionario")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Funcionario {
+
+@NamedNativeQuery(name  = "Funcionario.findTreinametnoByFuncionarioId_Named",
+                  query = "select t.treinamento_id as treinamentoId, t.data_inicio as dataInicio, "
+						+ "t.data_fim as dataFim, f.funcionario_id as funcionarioId, "
+						+ "t.nome "
+						+ "from Funcionario f join Treinamento t on f.funcionario_id = t.funcionario_id "
+						+ "where f.funcionario_id = :idFuncionario",
+                  resultSetMapping = "Mapping.TreinamentoDto"
+                  )
+
+@SqlResultSetMapping(name    = "Mapping.TreinamentoDto",
+                     classes = @ConstructorResult(targetClass = TreinamentoDto.class,
+                     columns = { @ColumnResult(name = "treinamentoId"),
+                                 @ColumnResult(name = "dataInicio"),
+                                 @ColumnResult(name = "dataFim"),
+                                 @ColumnResult(name = "funcionarioId"),
+                                 @ColumnResult(name = "nome") 
+                     }))
+public class Funcionario implements Serializable {
 	
+	private static final long serialVersionUID = -9138336069164136867L;
+
 	/**
 	 * Criando uma Primary Key com stratégia de geração incremental e automatica
 	 */
