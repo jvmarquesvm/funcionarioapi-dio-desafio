@@ -34,14 +34,14 @@ public class FuncionarioService {
 		return FuncionarioMapper.funcionarios2listFuncionarioDto(listFuncionarioCriado);
 	}
 	
-	public FuncionarioDto createFuncionario( Long id) throws FuncionarioNotFoundException {
-		Optional<Funcionario> optionalFuncionario = funcionarioRepository.findById(id);
+	public FuncionarioDto buscaFuncionarioPorId( Long id ) throws FuncionarioNotFoundException {
+		Optional<Funcionario> optionalFuncionario = funcionarioRepository.findById( id );
 		
 		if (optionalFuncionario.isEmpty()) {
 			throw new FuncionarioNotFoundException(id);
 		}
 		
-		return FuncionarioMapper.funcionario2funcionarioDto(optionalFuncionario.get());
+		return FuncionarioMapper.funcionario2funcionarioDto( optionalFuncionario.get() );
 	}
 	
 	public void apagarFuncionarioPorId( Long id ) {

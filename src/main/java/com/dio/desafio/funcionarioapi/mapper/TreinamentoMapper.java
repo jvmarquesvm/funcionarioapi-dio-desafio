@@ -35,7 +35,10 @@ public class TreinamentoMapper {
 			treinamentoDto.setDataInicio( Date.from( treinamento.getDataInicio().atStartOfDay(ZoneId.systemDefault()).toInstant()) );
 			treinamentoDto.setFuncionarioId(BigInteger.valueOf( treinamento.getFuncionario().getFuncionarioId() ));
 			treinamentoDto.setNome(treinamento.getNome().toString());
-			treinamentoDto.setTreinamentoId(BigInteger.valueOf( treinamento.getTreinamentoId() ));
+			
+			if(treinamento.getTreinamentoId() != null ) {
+				treinamentoDto.setTreinamentoId(BigInteger.valueOf( treinamento.getTreinamentoId()  ));
+			}
 			
 			listTreinamentoDto.add(treinamentoDto);
 		}

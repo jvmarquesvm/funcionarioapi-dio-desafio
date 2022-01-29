@@ -47,8 +47,8 @@ public class FuncionarioController {
 	}
 	
 	@GetMapping("/{id}")
-	public FuncionarioDto createFuncionario( @PathVariable Long id)   throws FuncionarioNotFoundException {
-		FuncionarioDto funcionarioDto = funcionarioService.createFuncionario( id );
+	public FuncionarioDto buscaFuncionarioPorId( @PathVariable Long id)   throws FuncionarioNotFoundException {
+		FuncionarioDto funcionarioDto = funcionarioService.buscaFuncionarioPorId( id );
 		return funcionarioDto;
 	}
 	
