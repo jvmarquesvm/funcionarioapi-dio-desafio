@@ -32,10 +32,10 @@ Criar treinamento para funcionario - POST - http://localhost:8080/v1/api/treinam
 Buscar todos os treinamentos por funcionario - GET - http://localhost:8080/v1/api/funcionario/{idFuncionario}/treinamento
 Buscar funcionario por id - GET - http://localhost:8080/v1/api/funcionario/{idFuncionario}
 Atualizar funcionario - PUT - http://localhost:8080/v1/api/funcionario/{idFuncionario}
-Apagar funcionairo - DELETE - http://localhost:8080/v1/api/funcionario/{idFuncionario}
+Apagar funcionario - DELETE - http://localhost:8080/v1/api/funcionario/{idFuncionario}
 Buscar todos os funcionarios - GET - http://localhost:8080/v1/api/funcionario
 Buscar todos os treinamentos cadastrados - GET - http://localhost:8080/v1/api/treinamento
-Apagar treinamento - DELETE - http://localhost:8080/v1/api/treinamento/1
+Apagar treinamento - DELETE - http://localhost:8080/v1/api/treinamento/{idFuncionario}
 ```
 
 
