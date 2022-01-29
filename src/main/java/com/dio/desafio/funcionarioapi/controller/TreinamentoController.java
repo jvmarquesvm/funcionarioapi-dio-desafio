@@ -13,47 +13,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dio.desafio.funcionarioapi.entidade.Funcionario;
+import com.dio.desafio.funcionarioapi.dto.TreinamentoDto;
 import com.dio.desafio.funcionarioapi.entidade.Treinamento;
 import com.dio.desafio.funcionarioapi.exception.FuncionarioNotFoundException;
-import com.dio.desafio.funcionarioapi.repository.FuncionarioRepository;
-import com.dio.desafio.funcionarioapi.repository.TreinamentoRepository;
+import com.dio.desafio.funcionarioapi.service.TreinamentoService;
 
 @RestController
 @RequestMapping("/v1/api/treinamento")
 public class TreinamentoController {
 	
-	private TreinamentoRepository treinamentoRepository;
-	private FuncionarioRepository funcionarioRepository;
+	private TreinamentoService treinamentoService;
 	
 	@Autowired
-	public TreinamentoController(TreinamentoRepository treinamentoRepository,
-			FuncionarioRepository funcionarioRepository) {
-		this.treinamentoRepository = treinamentoRepository;
-		this.funcionarioRepository = funcionarioRepository;
+	public TreinamentoController(TreinamentoService treinamentoService) {
+		this.treinamentoService = treinamentoService;
 	}
 
 	@GetMapping
-	public List<Treinamento> buscaTodosTreinamentos() {
-		List<Treinamento> treinamentos = treinamentoRepository.findAll();
-		return treinamentos;
+	public List<TreinamentoDto> buscaTodosTreinamentos() {
+		return treinamentoService.buscaTodosTreinamentos();
 	}
 	
 	@PostMapping
-	public Treinamento criarTreinamento(@RequestBody Treinamento treinamento) throws FuncionarioNotFoundException {
-		
-		Funcionario Funcionario = funcionarioRepository.getById(treinamento.getFuncionario().getFuncionarioId());
-		treinamento.setFuncionario(Funcionario);
-		
-		Treinamento treinamentoCriado = treinamentoRepository.save(treinamento);
-		return treinamentoCriado;
+	public String criarTreinamento(@RequestBody TreinamentoDto treinamentoDto) 
+			                                                             throws FuncionarioNotFoundException {
+		Treinamento treinamento = treinamentoService.criarTreinamento(treinamentoDto);
+		return "Treinamento criado paro o Funcionario id " + treinamento.getFuncionario().getFuncionarioId();
 	}
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void apagarTreinamento(@PathVariable Long id) {
-		treinamentoRepository.deleteById(id);
+		treinamentoService.apagarTreinamento(id);
 	}
-	
 	
 }
