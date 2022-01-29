@@ -24,6 +24,7 @@ mvn spring-boot:run
 
 Após executar o comando acima, basta apenas abrir o seguinte endereço e visualizar a execução do projeto:
 
+
 ```
 Operações:
 
@@ -36,6 +37,9 @@ Apagar funcionario - DELETE - http://localhost:8080/v1/api/funcionario/{idFuncio
 Buscar todos os funcionarios - GET - http://localhost:8080/v1/api/funcionario
 Buscar todos os treinamentos cadastrados - GET - http://localhost:8080/v1/api/treinamento
 Apagar treinamento - DELETE - http://localhost:8080/v1/api/treinamento/{idFuncionario}
+
+Dominío Heroku:
+https://funcionarioapi-live.herokuapp.com/
 ```
 
 
